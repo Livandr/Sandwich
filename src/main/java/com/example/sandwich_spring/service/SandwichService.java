@@ -6,4 +6,6 @@ import java.util.List;
 public interface SandwichService {
 
     List<SandwichDTO> getAll();
+
+    SandwichDTO getOne(Long id);
 }

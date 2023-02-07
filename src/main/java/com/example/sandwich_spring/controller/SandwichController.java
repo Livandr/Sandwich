@@ -1,9 +1,11 @@
 package com.example.sandwich_spring.controller;
 
+import com.example.sandwich_spring.models.dto.SandwichDTO;
 import com.example.sandwich_spring.service.SandwichService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,4 +24,13 @@ public class SandwichController {
         model.addAttribute("list", sandwichService.getAll());
         return "sandwich/display-all";
     }
+
+    //GET - http://localhost:8080/sandwich/one
+    @GetMapping("/{id:[0-9]+}")
+    public String getOne(Model model,@PathVariable long id){
+
+        model.addAttribute("sandwich", sandwichService.getOne(id));
+        return "sandwich/display-one";
+    }
+
 }

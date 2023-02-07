@@ -9,9 +9,12 @@ public class SandwichMapper {
     public SandwichDTO toDto(Sandwich entity){
         if(entity == null)
             return null;
-        return SandwichDTO.builder()
+        return SandwichDTO
+                .builder()
                 .id(entity.getId())
-                .name(entity.getName()).desc(entity.getDescription())
-                .price(entity.getPrice()).build();
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .build();
     }
 }

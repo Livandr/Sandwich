@@ -21,6 +21,9 @@
           <td th:text="*{id}">1</td>
           <td th:text="*{name}">basique</td>
           <td th:text="*{price}">5.50</td>
+            <td>
+                <a th:href="@{/sandwich/{id} (id=*{id})}">details</a>
+            </td>
         </tr>
     </tbody>
   </table>

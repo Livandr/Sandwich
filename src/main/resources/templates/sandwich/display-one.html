@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details sandwich</title>
+</head>
+<body>
+<h1>Détails sandwich</h1>
+<!--<div th:object="${sandwich}">-->
+
+  <dl th:object="${sandwich}">
+
+    </dt>id<dt>
+    <dd th:text="*{id}"></dd>
+    </dt>name<dt>
+    <dd th:text="*{name}"></dd>
+    </dt>price<dt>
+    <dd th:text="*{price}"></dd>
+    </dt>description<dt>
+    <dd th:text="*{description}"></dd>
+  </dl>
+<div>
+  <a href=@{/sandwich/all}>retour</a>
+</div>
+
+</body>
+</html>

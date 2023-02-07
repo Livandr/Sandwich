@@ -25,4 +25,11 @@ public class SandwichServiceImpl implements SandwichService {
                 .map(mapper::toDto)
                 .toList();
     }
+
+    @Override
+    public SandwichDTO getOne(Long id) {
+        return sandwichRepository.findById(id)
+                .map( mapper::toDto)
+                .orElseThrow(() -> new RuntimeException("sandwich not found"));
+    }
 }

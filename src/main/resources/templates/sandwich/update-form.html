@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>sandwich update form</h1>
+
+    <form th:action="@{/sandwich/{id}/update (id=${id}) }" method="post" th:object="${form}">
+      <div>
+        <label for="in-name">name</label><br>
+        <input type="text" th:field="*{name}" id="in-name">
+        <p th:if="${#fields.hasAnyErrors('name')}" th:errors="*{name}" style="color: red">attention erreur</p>
+      </div>
+      <div>
+        <label for="in-price">price</label><br>
+        <input type="number" th:field="*{price}" id="in-price">
+        <p th:if="${#fields.hasAnyErrors('price')}" th:errors="*{price}" style="color: red">attention erreur</p>
+      </div>
+      <div>
+        <label for="in-description">description</label><br>
+        <p th:if="${ #fields.hasErrors('desc') }" th:errors="*{desc}" style="color: red">attention erreur</p>
+        <textarea id="in-description" cols="30" rows="10" th:field="*{desc}"></textarea>
+      </div>
+
+      <button type="submit">modifier</button>
+
+    </form>
+
+</body>
+</html>

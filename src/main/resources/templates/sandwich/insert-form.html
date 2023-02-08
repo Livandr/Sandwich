@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{fragment/fragments :: base_css }"></th:block>
+</head>
+<body>
+    <h1>Sandwich insert form</h1>
+
+    <form action="/sandwich/add" method="post" th:object="${form}">
+        <div>
+            <label for="in-name">name</label><br/>
+            <input type="text" id="in-name" th:field="*{name}">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div>
+            <label for="in-price">price</label><br/>
+            <input type="text" id="in-price" th:field="*{price}">
+
+    </div>
+    <div>
+        <label for="in-description">description</label>
+        <textarea id="in-description" cols="30" rows="10" th:field="*{desc}"></textarea>
+    </div>
+    <div>
+        <button type="submit">envoyer</button>
+    </div>
+</form>
+    <th:block th:replace="~{fragment/fragments :: base_js }"></th:block>
+</body>
+</html>

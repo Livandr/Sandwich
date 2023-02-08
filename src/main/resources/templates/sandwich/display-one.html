@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Details sandwich</title>
+    <th:block th:replace="~{fragment/fragments :: base_css }"></th:block>
 </head>
 <body>
-<h1>Détails sandwich</h1>
-<!--<div th:object="${sandwich}">-->
+    <h1>Sandwich details:</h1>
 
-  <dl th:object="${sandwich}">
+    <dl th:object="${sandwich}">
 
     </dt>id<dt>
     <dd th:text="*{id}"></dd>
@@ -19,9 +19,13 @@
     </dt>description<dt>
     <dd th:text="*{description}"></dd>
   </dl>
+
 <div>
-  <a href=@{/sandwich/all}>retour</a>
+  <a href=@{/sandwich/all}>
+      <button>back to menu</button>
+  </a>
 </div>
 
+    <th:block th:replace="~{fragment/fragments :: base_js }"></th:block>
 </body>
 </html>

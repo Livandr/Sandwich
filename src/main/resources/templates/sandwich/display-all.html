@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{fragment/fragments :: base_css }"></th:block>
+
 </head>
 <body>
+  <th:block th:replace="~{fragment/header :: base_header }"><th:block>
 
   <h1>Sandwich menu</h1>
 
@@ -27,6 +30,9 @@
         </tr>
     </tbody>
   </table>
+   <th:block th:replace="~{fragment/footer :: base_footer}"></th:block>
+
+   <div th:replace="~{fragment/fragments :: base_js}"></div>
 
 </body>
 </html>

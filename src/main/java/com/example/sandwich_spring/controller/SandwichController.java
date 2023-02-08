@@ -1,12 +1,15 @@
 package com.example.sandwich_spring.controller;
 
 import com.example.sandwich_spring.models.dto.SandwichDTO;
+import com.example.sandwich_spring.models.form.SandwichInsertForm;
+import com.example.sandwich_spring.models.form.SandwichUpdateForm;
+import com.example.sandwich_spring.models.form.RegisterForm;
 import com.example.sandwich_spring.service.SandwichService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/sandwich")
@@ -31,6 +34,47 @@ public class SandwichController {
 
         model.addAttribute("sandwich", sandwichService.getOne(id));
         return "sandwich/display-one";
+    }
+    @GetMapping("/add")
+    public String insertForm(Model model){
+        model.addAttribute("form",new SandwichInsertForm());
+        return "sandwich/insert-form";
+    }
+
+    @PostMapping("/add")
+    public String processInsertForm(@ModelAttribute("form") @Valid SandwichInsertForm form, BindingResult bindingResult){
+            if(bindingResult.hasErrors()){
+                return "sandwich/insert-form";
+            }
+            sandwichService.insert(form);
+            return "redirect:/sandwich/all";
+        }
+
+    @GetMapping("/{id:[0-9]+}/update")
+    public String updateForm(Model model, @PathVariable long id) {
+        SandwichUpdateForm form = new SandwichUpdateForm();
+        SandwichDTO sandwich = sandwichService.getOne(id);
+        form.setName(sandwich.getName());
+        form.setPrice(sandwich.getPrice());
+        form.setDesc(sandwich.getDescription());
+
+        model.addAttribute("form", form);
+        model.addAttribute("id", id);
+
+        return "sandwich/update-form";
+    }
+
+    @PostMapping("/{id:[0-9]+}/update")
+    public String processUpdateForm(
+            @PathVariable Long id,
+            @ModelAttribute("form") @Valid SandwichUpdateForm form,
+            BindingResult bindingResult
+    ){
+        if(bindingResult.hasErrors()){
+            return "sandwich/update-form";
+        }
+        sandwichService.update(id, form);
+        return "redirect:/sandwich/" + id;
     }
 
 }

@@ -10,8 +10,7 @@ public class SandwichMapper {
     public SandwichDTO toDto(Sandwich entity){
         if(entity == null)
             return null;
-        return SandwichDTO
-                .builder()
+        return SandwichDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
@@ -20,14 +19,15 @@ public class SandwichMapper {
     }
 
     public Sandwich toEntity(SandwichInsertForm form){
-
         if(form == null)
             return null;
+
         Sandwich sandwich = new Sandwich();
 
         sandwich.setName(form.getName());
         sandwich.setPrice(form.getPrice());
         sandwich.setDescription(form.getDesc());
+
         return sandwich;
     }
 }

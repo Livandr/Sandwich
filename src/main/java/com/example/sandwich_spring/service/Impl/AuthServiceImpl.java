@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void register(RegisterForm form) {
 
-        if( userRepository.existsByEmail(form.getUsername()) )
+        if( userRepository.existsByEmail(form.getEmail()) )
             throw new EmailAlreadyTakenException();
 
         User user = userMapper.toEntity(form);

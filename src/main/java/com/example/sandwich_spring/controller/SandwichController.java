@@ -1,9 +1,10 @@
 package com.example.sandwich_spring.controller;
 
+import com.example.sandwich_spring.models.dto.IngredientDTO;
 import com.example.sandwich_spring.models.dto.SandwichDTO;
 import com.example.sandwich_spring.models.form.SandwichInsertForm;
 import com.example.sandwich_spring.models.form.SandwichUpdateForm;
-import com.example.sandwich_spring.models.form.RegisterForm;
+import com.example.sandwich_spring.service.IngredientService;
 import com.example.sandwich_spring.service.SandwichService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class SandwichController {
 
     private final SandwichService sandwichService;
+    private final IngredientService ingredientService;
 
-    public SandwichController(SandwichService sandwichService) {
+    public SandwichController(SandwichService sandwichService, IngredientService ingredientService) {
         this.sandwichService = sandwichService;
+        this.ingredientService = ingredientService;
     }
 
     //GET - http://localhost:8080/sandwich/all
@@ -38,6 +41,7 @@ public class SandwichController {
     @GetMapping("/add")
     public String insertForm(Model model){
         model.addAttribute("form",new SandwichInsertForm());
+        model.addAttribute("ingredients", ingredientService.getAll());
         return "sandwich/insert-form";
     }
 
@@ -57,9 +61,15 @@ public class SandwichController {
         form.setName(sandwich.getName());
         form.setPrice(sandwich.getPrice());
         form.setDesc(sandwich.getDescription());
+        form.setIngredientsId(
+                sandwich.getIngredients().stream()
+                        .map(IngredientDTO::getId)
+                        .toList()
+        );
 
         model.addAttribute("form", form);
         model.addAttribute("id", id);
+        model.addAttribute("ingredients", ingredientService.getAll());
 
         return "sandwich/update-form";
     }
@@ -76,5 +86,7 @@ public class SandwichController {
         sandwichService.update(id, form);
         return "redirect:/sandwich/" + id;
     }
+
+
 
 }

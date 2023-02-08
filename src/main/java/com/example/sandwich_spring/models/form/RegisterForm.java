@@ -10,7 +10,7 @@ public class RegisterForm {
 
     @NotBlank
     @Email
-    private String username;
+    private String email;
 
     @NotBlank
     @Min(4)

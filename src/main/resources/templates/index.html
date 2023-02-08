@@ -1,25 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{fragment/layout :: layout(~{ :: content })}">
 <head>
     <meta charset="UTF-8">
-    <title>Sandwich</title>
-    <th:block th:replace="~{fragment/fragments :: base_css }"></th:block>
+    <title>Title</title>
 </head>
 <body>
-    <header>
-        <th:block th:replace="~{fragment/header :: header }"><th:block>
-    </header>
 
-
+<th:block th:fragment="content">
     <h1>Homepage</h1>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam hic ipsa iste praesentium tenetur? Accusantium aperiam aut beatae commodi, dolore dolorem dolores eaque eos, incidunt ipsam itaque, molestias neque omnis repudiandae rerum saepe sunt vel velit veniam voluptate! Blanditiis, maiores.</p>
+</th:block>
 
-    <footer>
-        <th:block th:replace="~{fragment/footer :: footer}"></th:block>
-    </footer>
-
-    <th:block th:replace="~{fragment/fragments :: base_js }"></th:block>
 </body>
 </html>
 
